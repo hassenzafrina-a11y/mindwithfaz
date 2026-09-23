@@ -170,9 +170,12 @@ body.scrolled .brand img, body.scrolled .mbar-brand img {
 .hero h1 em { font-style: italic; color: var(--gold-dark); }
 .hero-bottom { display: flex; gap: 64px; align-items: flex-end; flex-wrap: wrap; }
 .hero-quote { border-left: 2px solid var(--gold); padding-left: 22px; max-width: 42ch; font-size: 18px; color: var(--sub); }
-.hero-side { display: flex; flex-direction: column; gap: 20px; min-width: 220px; }
-.hero-triad { display: flex; flex-direction: column; gap: 8px; font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--heading); }
-.hero-triad span { color: var(--sub); font-family: var(--sans); font-style: normal; font-size: 13.5px; }
+.hero-side { display: flex; flex-direction: column; gap: 24px; min-width: 260px; }
+.hero-triad { display: flex; flex-direction: column; gap: 20px; }
+.triad-item { display: flex; align-items: flex-start; gap: 14px; }
+.triad-ring { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--gold); margin-top: 8px; flex-shrink: 0; }
+.triad-item h3 { font-size: 18px; margin-bottom: 4px; }
+.triad-item p { font-size: 14px; color: var(--sub); line-height: 1.5; }
 .hero-meta { font-size: 13.5px; color: var(--sub); line-height: 1.8; }
 
 section { max-width: 1240px; margin: 0 auto; padding: 70px 56px; border-top: 1px solid var(--border); }
