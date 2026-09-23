@@ -29,6 +29,27 @@
 </head>
 <body>
 
+<div id="splash">
+  <img src="assets/logo-transparent.png" alt="" width="84" height="84">
+  <span>Mind With Faz</span>
+</div>
+<script>
+(function () {
+  var splash = document.getElementById('splash');
+  var isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  var alreadyShown = sessionStorage.getItem('mwf-splash-shown');
+  if (!isStandalone || alreadyShown) {
+    splash.style.display = 'none';
+  } else {
+    sessionStorage.setItem('mwf-splash-shown', '1');
+    setTimeout(function () {
+      splash.classList.add('hide');
+      setTimeout(function () { splash.style.display = 'none'; }, 450);
+    }, 1000);
+  }
+})();
+</script>
+
 <header class="nav">
   <div class="nav-inner">
     <a href="index.html" class="brand">

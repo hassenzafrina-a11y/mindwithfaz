@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mindwithfaz-v3';
+const CACHE_NAME = 'mindwithfaz-v4';
 
 const CORE_ASSETS = [
   'index.html',
