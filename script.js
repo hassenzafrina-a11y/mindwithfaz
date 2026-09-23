@@ -80,3 +80,64 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(() => {});
   });
 }
+
+// Understand / Heal / Grow: the first ring fills, a line draws down to the
+// next ring, and that ring fills right as the line reaches it — repeating
+// down the list. Ring positions are measured (not hardcoded) so it stays
+// accurate regardless of how the description text wraps.
+(() => {
+  const track = document.querySelector('.hero-triad');
+  if (!track) return;
+
+  const rings = track.querySelectorAll('.triad-ring');
+  if (rings.length < 2) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    rings.forEach((ring) => ring.classList.add('filled'));
+    return;
+  }
+
+  const line = document.createElement('span');
+  line.className = 'triad-line';
+  track.insertBefore(line, track.firstChild);
+
+  const LINE_DURATION = 1400;
+
+  function measure() {
+    const trackTop = track.getBoundingClientRect().top;
+    const firstRect = rings[0].getBoundingClientRect();
+    const lastRect = rings[rings.length - 1].getBoundingClientRect();
+    const top = firstRect.top - trackTop + firstRect.height / 2;
+    const bottom = lastRect.top - trackTop + lastRect.height / 2;
+    const span = bottom - top;
+
+    line.style.top = `${top}px`;
+    line.style.height = `${Math.max(span, 0)}px`;
+
+    return { trackTop, top, span };
+  }
+
+  function play() {
+    const { trackTop, top, span } = measure();
+
+    rings.forEach((ring, i) => {
+      if (i === 0) {
+        ring.classList.add('filled');
+        return;
+      }
+      const ringRect = ring.getBoundingClientRect();
+      const ringCenter = ringRect.top - trackTop + ringRect.height / 2;
+      const fraction = span > 0 ? (ringCenter - top) / span : 1;
+      const delay = Math.max(0, fraction * LINE_DURATION);
+      setTimeout(() => ring.classList.add('filled'), delay);
+    });
+
+    line.classList.add('grow');
+  }
+
+  measure();
+  // Wait for the hero's own fade-up entrance to settle before starting.
+  setTimeout(play, 1300);
+  // Keep the line correctly positioned on resize, without replaying the fill sequence.
+  window.addEventListener('resize', measure);
+})();

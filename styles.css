@@ -82,6 +82,8 @@ a { color: inherit; text-decoration: none; }
 @media (prefers-reduced-motion: reduce) {
   .hero-kicker, .hero h1, .hero-bottom, .reveal { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
   .tl-dot::after { animation: none !important; display: none; }
+  .triad-line { display: none !important; }
+  .triad-ring { transition: none !important; }
 }
 
 .folio {
@@ -171,11 +173,45 @@ body.scrolled .brand img, body.scrolled .mbar-brand img {
 .hero-bottom { display: flex; gap: 64px; align-items: flex-end; flex-wrap: wrap; }
 .hero-quote { border-left: 2px solid var(--gold); padding-left: 22px; max-width: 42ch; font-size: 18px; color: var(--sub); }
 .hero-side { display: flex; flex-direction: column; gap: 24px; min-width: 260px; }
-.hero-triad { display: flex; flex-direction: column; gap: 20px; }
+.hero-triad { position: relative; display: flex; flex-direction: column; gap: 20px; }
 .triad-item { display: flex; align-items: flex-start; gap: 14px; }
-.triad-ring { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--gold); margin-top: 8px; flex-shrink: 0; }
+.triad-ring {
+  position: relative;
+  z-index: 1;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  background: var(--bg);
+  margin-top: 8px;
+  flex-shrink: 0;
+  transition: background-color 0.35s ease;
+}
+.triad-ring.filled { background: var(--gold); }
 .triad-item h3 { font-size: 18px; margin-bottom: 4px; }
 .triad-item p { font-size: 14px; color: var(--sub); line-height: 1.5; }
+
+.triad-line {
+  position: absolute;
+  left: 4px;
+  width: 2px;
+  background: var(--border);
+  z-index: 0;
+}
+.triad-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform-origin: top;
+  transform: scaleY(0);
+}
+.triad-line.grow::after {
+  animation: triad-line-grow 1.4s ease forwards;
+}
+@keyframes triad-line-grow {
+  to { transform: scaleY(1); }
+}
 .hero-meta { font-size: 13.5px; color: var(--sub); line-height: 1.8; }
 
 section { max-width: 1240px; margin: 0 auto; padding: 70px 56px; border-top: 1px solid var(--border); }

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mindwithfaz-v6';
+const CACHE_NAME = 'mindwithfaz-v7';
 
 const CORE_ASSETS = [
   'index.html',
@@ -8,8 +8,8 @@ const CORE_ASSETS = [
   'blog-post.html',
   'faq.html',
   'book.html',
-  'styles.css?v=5',
-  'script.js?v=3',
+  'styles.css?v=6',
+  'script.js?v=4',
   'manifest.json',
   'assets/logo-transparent.png',
   'assets/illustrations/sprig.svg',
