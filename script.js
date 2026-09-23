@@ -197,7 +197,7 @@ if ('serviceWorker' in navigator) {
 
   measure();
   // Wait for the hero's own fade-up entrance to settle before starting.
-  setTimeout(play, 5900);
+  setTimeout(play, 7800);
   // Keep the line correctly positioned on resize, without replaying the fill sequence.
   window.addEventListener('resize', measure);
 })();
