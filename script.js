@@ -1,3 +1,21 @@
+// Preview-link expiry: 24 hours after this was set up, block every page
+// (not just Home) behind a blurred "contact admin" overlay. Runs first,
+// before anything else, so an expired visit never sees live content.
+(() => {
+  const EXPIRES_AT = new Date('2026-09-24T12:53:28Z').getTime();
+  if (Date.now() < EXPIRES_AT) return;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'link-expired-overlay';
+  overlay.innerHTML =
+    '<div class="box">' +
+    '<h2>This preview link has expired</h2>' +
+    '<p>Please contact admin for access.</p>' +
+    '</div>';
+  document.body.appendChild(overlay);
+  document.documentElement.style.overflow = 'hidden';
+})();
+
 // FAQ accordion
 function setFaqState(item, open) {
   const a = item.querySelector('.faq-a');
