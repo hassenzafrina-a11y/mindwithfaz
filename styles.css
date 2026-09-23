@@ -353,6 +353,11 @@ section { max-width: 1240px; margin: 0 auto; padding: 70px 56px; border-top: 1px
 
 /* ---- footer ---- */
 footer { max-width: 1240px; margin: 0 auto; padding: 44px 56px 40px; }
+
+/* ---- mobile bottom tab bar (PWA) ---- */
+.bottom-nav {
+  display: none;
+}
 .footer-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; align-items: center; }
 .footer-brand { font-family: var(--serif); font-size: 17px; color: var(--heading); }
 .footer-links { display: flex; gap: 26px; font-size: 14px; }
@@ -363,6 +368,34 @@ footer { max-width: 1240px; margin: 0 auto; padding: 44px 56px 40px; }
   .nav-links { display: none; }
   .nav-inner { padding: 14px 20px; }
   .icon-link { display: none; }
+  .nav-book { display: none; }
+  body { padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)); }
+
+  .bottom-nav {
+    display: flex;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 70;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 6px 2px calc(6px + env(safe-area-inset-bottom, 0px));
+  }
+  .bottom-nav a {
+    flex: 1;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    font-size: 10px; letter-spacing: 0.01em; color: var(--sub);
+    padding: 4px 0;
+  }
+  .bottom-nav a svg { width: 20px; height: 20px; }
+  .bottom-nav a.active { color: var(--gold-dark); font-weight: 600; }
+  .bottom-nav a.nav-cta-tab { color: var(--gold-dark); font-weight: 600; }
+  .bottom-nav a.nav-cta-tab .tab-icon {
+    display: flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px; margin-top: -8px;
+    background: var(--gold); border-radius: 50%;
+  }
+  .bottom-nav a.nav-cta-tab .tab-icon svg { width: 15px; height: 15px; color: var(--white); }
+
+  body.scrolled .bottom-nav { background: var(--bg); }
+
   .hero, section, footer { padding-left: 20px; padding-right: 20px; }
   .marquee { margin: 0 -20px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 20px, #000 calc(100% - 20px), transparent); mask-image: linear-gradient(90deg, transparent, #000 20px, #000 calc(100% - 20px), transparent); }
   .quote-card { width: 280px; }
