@@ -453,8 +453,8 @@ footer { max-width: 1240px; margin: 0 auto; padding: 44px 56px 40px; }
   z-index: 80;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
+  width: 68px;
+  height: 68px;
   padding: 0;
   background: var(--heading);
   color: var(--white);
@@ -463,7 +463,7 @@ footer { max-width: 1240px; margin: 0 auto; padding: 44px 56px 40px; }
   transition: background 0.2s ease, transform 0.2s ease, bottom 0.25s ease;
 }
 .fab:hover { background: #16211a; transform: translateY(-2px); }
-.fab svg { flex-shrink: 0; width: 24px; height: 24px; }
+.fab svg { flex-shrink: 0; width: 30px; height: 30px; }
 .footer-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; align-items: center; }
 .footer-brand { font-family: var(--serif); font-size: 17px; color: var(--heading); }
 .footer-links { display: flex; gap: 26px; font-size: 14px; }
