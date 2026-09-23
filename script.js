@@ -179,6 +179,7 @@ if ('serviceWorker' in navigator) {
 
   function play() {
     const { trackTop, top, span } = measure();
+    const RING_FILL_TRANSITION_MS = 350; // matches .triad-ring's own CSS transition
 
     rings.forEach((ring, i) => {
       if (i === 0) {
@@ -190,6 +191,15 @@ if ('serviceWorker' in navigator) {
       const fraction = span > 0 ? (ringCenter - top) / span : 1;
       const delay = Math.max(0, fraction * LINE_DURATION);
       setTimeout(() => ring.classList.add('filled'), delay);
+
+      // Once the last ring (Grow) has actually finished filling, reveal
+      // whatever section is waiting on that moment.
+      if (i === rings.length - 1) {
+        const nextBlock = document.getElementById('after-triad');
+        if (nextBlock) {
+          setTimeout(() => nextBlock.classList.add('in-view'), delay + RING_FILL_TRANSITION_MS);
+        }
+      }
     });
 
     line.classList.add('grow');
