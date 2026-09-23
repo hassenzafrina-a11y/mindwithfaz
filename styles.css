@@ -501,6 +501,7 @@ footer { max-width: 1240px; margin: 0 auto; padding: 44px 56px 40px; }
   }
 
   .hero, section, footer { padding-left: 20px; padding-right: 20px; }
+  .hero { padding-top: 36px; padding-bottom: 48px; }
   .hero-decor { width: 300px; height: 300px; top: -80px; right: -100px; }
   .marquee { margin: 0 -20px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 20px, #000 calc(100% - 20px), transparent); mask-image: linear-gradient(90deg, transparent, #000 20px, #000 calc(100% - 20px), transparent); }
   .quote-card { width: 280px; }
@@ -514,7 +515,7 @@ footer { max-width: 1240px; margin: 0 auto; padding: 44px 56px 40px; }
   .pull-quote:nth-child(2) { margin-left: 0; text-align: left; }
   .pull-quote:nth-child(2) .pull-attr { justify-content: flex-start; flex-direction: row; }
   .pull-quote:nth-child(2) .pull-attr::before { order: 0; }
-  .page-hero { padding: 44px 20px 36px; }
+  .page-hero { padding: 32px 20px 32px; }
   .cta-band-inner { padding: 36px 20px; }
   .blog-card { grid-template-columns: 1fr; gap: 6px; }
   .form-row { grid-template-columns: 1fr; gap: 0; }
