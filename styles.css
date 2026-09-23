@@ -66,14 +66,14 @@ a { color: inherit; text-decoration: none; }
   animation-delay: 0.05s;
 }
 
-/* Quote: a slow, soft blur-to-focus reveal — like eyes settling and the
-   words gently coming into clarity, rather than a snap into place. */
-@keyframes quote-settle {
-  from { opacity: 0; filter: blur(6px); transform: translateY(10px); }
-  to { opacity: 1; filter: blur(0); transform: translateY(0); }
+/* Quote: a slow horizontal slide, drawn out from the left where its gold
+   border accent anchors it — unhurried, no bounce. */
+@keyframes quote-slide {
+  from { opacity: 0; transform: translateX(-36px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 .hero-quote {
-  animation: quote-settle 2s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  animation: quote-slide 1.9s cubic-bezier(0.2, 0.7, 0.3, 1) both;
   animation-delay: 5s;
 }
 
