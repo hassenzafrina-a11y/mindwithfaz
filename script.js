@@ -117,7 +117,7 @@ if ('serviceWorker' in navigator) {
 
   const cursor = document.createElement('span');
   cursor.className = 'typewriter-cursor';
-  h1.appendChild(cursor);
+  h1.insertBefore(cursor, h1.firstChild); // starts before the first character, not the end
 
   const BASE_DELAY_MS = 40;
   const JITTER_MS = 20;
@@ -128,6 +128,10 @@ if ('serviceWorker' in navigator) {
   let t = 300; // initial pause before typing begins
   chars.forEach(({ span, ch }) => {
     span.style.transitionDelay = `${t}ms`;
+    // Move the cursor to sit right after this character the moment it reveals,
+    // so it visibly travels along with the text instead of sitting at the end.
+    setTimeout(() => span.insertAdjacentElement('afterend', cursor), t);
+
     if (ch === '.' || ch === '!' || ch === '?') t += BASE_DELAY_MS + PAUSE_PERIOD_MS;
     else if (ch === ',') t += BASE_DELAY_MS + PAUSE_COMMA_MS;
     else if (ch === ' ') t += BASE_DELAY_MS + PAUSE_SPACE_MS;
