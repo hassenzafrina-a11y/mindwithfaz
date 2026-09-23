@@ -1,0 +1,14 @@
+{
+  "name": "Mind With Faz — Psychological Counselling",
+  "short_name": "Mind With Faz",
+  "description": "Fazminna Farook, Psychological Counsellor in Colombo — book a session, read FAQs, and more.",
+  "start_url": "index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e2b21",
+  "icons": [
+    { "src": "assets/favicon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/favicon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

@@ -64,3 +64,10 @@ window.addEventListener('scroll', () => {
   }
 }, { passive: true });
 updateNavScrollState();
+
+// Register the service worker for offline access and faster repeat visits.
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
