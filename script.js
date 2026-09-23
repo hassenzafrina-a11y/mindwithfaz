@@ -81,6 +81,63 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+// Hero headline: a slow, breath-paced typewriter reveal, not a fast/
+// mechanical one. Characters are pre-laid-out as spans (so nothing reflows
+// or jumps as they appear) and revealed with a gentle per-character delay
+// plus extra pauses at punctuation, like someone speaking calmly rather
+// than text being dumped on screen.
+(() => {
+  const h1 = document.querySelector('.hero h1');
+  if (!h1) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const sourceHTML = h1.innerHTML.trim();
+  const segments = [];
+  const segmentRe = /<em>(.*?)<\/em>|([^<]+)/g;
+  let match;
+  while ((match = segmentRe.exec(sourceHTML))) {
+    if (match[1] !== undefined) segments.push({ text: match[1], em: true });
+    else if (match[2] !== undefined) segments.push({ text: match[2], em: false });
+  }
+
+  h1.innerHTML = '';
+  const chars = [];
+
+  segments.forEach((segment) => {
+    const parent = segment.em ? document.createElement('em') : h1;
+    if (segment.em) h1.appendChild(parent);
+    Array.from(segment.text).forEach((ch) => {
+      const span = document.createElement('span');
+      span.className = 'char';
+      span.textContent = ch;
+      parent.appendChild(span);
+      chars.push({ span, ch });
+    });
+  });
+
+  const cursor = document.createElement('span');
+  cursor.className = 'typewriter-cursor';
+  h1.appendChild(cursor);
+
+  const BASE_DELAY_MS = 40;
+  const JITTER_MS = 20;
+  const PAUSE_PERIOD_MS = 380;
+  const PAUSE_COMMA_MS = 200;
+  const PAUSE_SPACE_MS = 25;
+
+  let t = 300; // initial pause before typing begins
+  chars.forEach(({ span, ch }) => {
+    span.style.transitionDelay = `${t}ms`;
+    if (ch === '.' || ch === '!' || ch === '?') t += BASE_DELAY_MS + PAUSE_PERIOD_MS;
+    else if (ch === ',') t += BASE_DELAY_MS + PAUSE_COMMA_MS;
+    else if (ch === ' ') t += BASE_DELAY_MS + PAUSE_SPACE_MS;
+    else t += BASE_DELAY_MS + Math.random() * JITTER_MS;
+  });
+
+  requestAnimationFrame(() => h1.classList.add('typing'));
+  setTimeout(() => cursor.classList.add('done'), t + 400);
+})();
+
 // Understand / Heal / Grow: the first ring fills, a line draws down to the
 // next ring, and that ring fills right as the line reaches it — repeating
 // down the list. Ring positions are measured (not hardcoded) so it stays
@@ -137,7 +194,7 @@ if ('serviceWorker' in navigator) {
 
   measure();
   // Wait for the hero's own fade-up entrance to settle before starting.
-  setTimeout(play, 2800);
+  setTimeout(play, 5900);
   // Keep the line correctly positioned on resize, without replaying the fill sequence.
   window.addEventListener('resize', measure);
 })();

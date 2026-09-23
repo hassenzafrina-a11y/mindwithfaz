@@ -65,18 +65,34 @@ a { color: inherit; text-decoration: none; }
   animation: fade-up 0.9s cubic-bezier(0.2, 0.7, 0.3, 1) both;
 }
 .hero-kicker { animation-delay: 0.05s; }
-.hero-bottom { animation-delay: 1.9s; }
+.hero-bottom { animation-delay: 5s; }
 
-.hero h1 .word {
-  display: inline-block;
+/* Slow, breath-paced typewriter reveal for the hero headline — deliberately
+   unhurried, with extra pauses at punctuation, rather than a fast/mechanical
+   typing effect. Characters are pre-laid-out (no text reflow as they appear)
+   so nothing jumps around while it plays. */
+.hero h1 .char {
   opacity: 0;
-  transform: translateY(0.4em);
-  animation: word-in 0.7s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
-  animation-delay: calc(var(--i) * 0.07s + 0.2s);
+  transition: opacity 0.5s ease;
 }
-.hero h1 .word:not(:last-child) { margin-right: 0.26em; }
-@keyframes word-in {
-  to { opacity: 1; transform: translateY(0); }
+.hero h1.typing .char { opacity: 1; }
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 0.85em;
+  background: var(--gold-dark);
+  margin-left: 3px;
+  vertical-align: text-bottom;
+  animation: cursor-blink 1.1s step-end infinite;
+}
+.typewriter-cursor.done {
+  animation: none;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+@keyframes cursor-blink {
+  50% { opacity: 0; }
 }
 
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.8s cubic-bezier(0.2, 0.7, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.7, 0.3, 1); }
@@ -91,10 +107,11 @@ a { color: inherit; text-decoration: none; }
 .tl-step:nth-child(3) .tl-dot::after { animation-delay: 1.2s; }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-kicker, .hero-bottom, .reveal, .hero h1 .word { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
+  .hero-kicker, .hero-bottom, .reveal, .hero h1 .char { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
   .tl-dot::after { animation: none !important; display: none; }
   .triad-line { display: none !important; }
   .triad-ring { transition: none !important; }
+  .typewriter-cursor { display: none !important; }
 }
 
 .folio {
