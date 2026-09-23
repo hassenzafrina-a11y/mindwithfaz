@@ -73,7 +73,7 @@ a { color: inherit; text-decoration: none; }
    so nothing jumps around while it plays. */
 .hero h1 .char {
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.12s ease;
 }
 .hero h1.typing .char { opacity: 1; }
 
