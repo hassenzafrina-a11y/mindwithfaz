@@ -66,12 +66,19 @@ window.addEventListener('scroll', () => {
 updateNavScrollState();
 
 // Register the service worker for offline access and faster repeat visits.
-// If a newer service worker takes over (a fresh deploy), reload automatically
-// so nobody is stuck looking at a stale cached version of the site.
+// If a newer service worker REPLACES one that was already controlling this
+// page (a fresh deploy landing while the site is open), reload automatically
+// so nobody is stuck looking at a stale cached version. `controllerchange`
+// also fires the very first time any service worker takes control of a page
+// (e.g. on a normal refresh with no prior controller) — that's not a stale-
+// content situation, so only reload when a controller is being swapped out,
+// not when one is attaching for the first time.
 if ('serviceWorker' in navigator) {
+  const hadController = Boolean(navigator.serviceWorker.controller);
   let hasReloaded = false;
+
   navigator.serviceWorker.addEventListener('controllerchange', () => {
-    if (hasReloaded) return;
+    if (!hadController || hasReloaded) return;
     hasReloaded = true;
     window.location.reload();
   });
