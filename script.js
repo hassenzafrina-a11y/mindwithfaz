@@ -66,7 +66,16 @@ window.addEventListener('scroll', () => {
 updateNavScrollState();
 
 // Register the service worker for offline access and faster repeat visits.
+// If a newer service worker takes over (a fresh deploy), reload automatically
+// so nobody is stuck looking at a stale cached version of the site.
 if ('serviceWorker' in navigator) {
+  let hasReloaded = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (hasReloaded) return;
+    hasReloaded = true;
+    window.location.reload();
+  });
+
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js').catch(() => {});
   });

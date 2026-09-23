@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mindwithfaz-v2';
+const CACHE_NAME = 'mindwithfaz-v3';
 
 const CORE_ASSETS = [
   'index.html',
@@ -8,8 +8,8 @@ const CORE_ASSETS = [
   'blog-post.html',
   'faq.html',
   'book.html',
-  'styles.css?v=2',
-  'script.js?v=2',
+  'styles.css?v=3',
+  'script.js?v=3',
   'manifest.json',
   'assets/logo-transparent.png',
   'assets/illustrations/sprig.svg',
@@ -34,11 +34,37 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Stale-while-revalidate: serve from cache instantly when available,
-// refresh the cache in the background, and fall back to cache if offline.
+// Pages, CSS and JS: always try the network first so visitors get the
+// current version. Cache is only a fallback for genuinely offline use.
+function isCoreDocument(request) {
+  return (
+    request.mode === 'navigate' ||
+    request.destination === 'document' ||
+    request.destination === 'style' ||
+    request.destination === 'script'
+  );
+}
+
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
+  if (isCoreDocument(event.request)) {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          if (response.ok) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          }
+          return response;
+        })
+        .catch(() => caches.match(event.request))
+    );
+    return;
+  }
+
+  // Images and other static assets: stale-while-revalidate for speed —
+  // low cost if briefly out of date, and this keeps the site fast.
   event.respondWith(
     caches.match(event.request).then((cached) => {
       const network = fetch(event.request)
