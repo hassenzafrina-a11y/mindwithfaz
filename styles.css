@@ -369,6 +369,7 @@ footer { max-width: 1240px; margin: 0 auto; padding: 44px 56px 40px; }
   .nav-inner { padding: 14px 20px; }
   .icon-link { display: none; }
   .nav-book { display: none; }
+  .footer-nav-link { display: none; }
   body { padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)); }
 
   .bottom-nav {
