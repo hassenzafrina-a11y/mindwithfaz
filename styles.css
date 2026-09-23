@@ -456,13 +456,13 @@ footer { max-width: 1240px; margin: 0 auto; padding: 44px 56px 40px; }
   width: 68px;
   height: 68px;
   padding: 0;
-  background: var(--heading);
+  background: var(--gold);
   color: var(--white);
   border-radius: 50%;
-  box-shadow: 0 6px 20px rgba(30, 43, 33, 0.4);
+  box-shadow: 0 6px 20px rgba(184, 134, 59, 0.4);
   transition: background 0.2s ease, transform 0.2s ease, bottom 0.25s ease;
 }
-.fab:hover { background: #16211a; transform: translateY(-2px); }
+.fab:hover { background: var(--gold-dark); transform: translateY(-2px); }
 .fab svg { flex-shrink: 0; width: 30px; height: 30px; }
 .footer-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; align-items: center; }
 .footer-brand { font-family: var(--serif); font-size: 17px; color: var(--heading); }
