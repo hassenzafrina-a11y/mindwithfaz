@@ -1,0 +1,7 @@
+# Claude Code / Artifact preview scaffolding — not part of the deployed site
+.claude/
+artifact_template.html
+artifact_final.html
+artifact_home.html
+
+.DS_Store
