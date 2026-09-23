@@ -359,13 +359,14 @@ footer { max-width: 1240px; margin: 0 auto; padding: 44px 56px 40px; }
   display: none;
 }
 
-/* ---- persistent floating "Book" button, all breakpoints ---- */
+/* ---- floating "Book" button, mobile/tablet only ---- */
 .fab {
+  display: none;
   position: fixed;
   right: 24px;
   bottom: 24px;
   z-index: 80;
-  display: flex;
+  align-items: center;
   align-items: center;
   gap: 8px;
   background: var(--gold);
@@ -413,6 +414,7 @@ footer { max-width: 1240px; margin: 0 auto; padding: 44px 56px 40px; }
   body.scrolled .bottom-nav { background: var(--bg); }
 
   .fab {
+    display: flex;
     right: 16px;
     bottom: calc(60px + env(safe-area-inset-bottom, 0px) + 14px);
     padding: 13px 18px;
